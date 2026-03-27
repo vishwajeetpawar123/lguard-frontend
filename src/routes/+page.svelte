@@ -51,8 +51,7 @@
         result = null;
 
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-            const response = await fetch(`${apiUrl}/predict`, {
+            const response = await fetch('http://localhost:8000/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -304,7 +303,7 @@
                         <span class="mr-2 opacity-80">📊</span> Diagnostic Probability Distribution
                     </h3>
                     <div class="space-y-4">
-                        {#each ['Healthy Liver', 'Stage 1: Inflammation', 'Stage 2: Significant', 'Stage 3: Severe', 'Stage 4: Critical'] as label, i}
+                        {#each ['Healthy Liver', 'Stage 1: Inflammation', 'Stage 2: Fibrosis/Significant', 'Stage 3: Cirrhosis/Severe', 'Stage 4: End-Stage/Critical'] as label, i}
                             <div class="space-y-1.5 group">
                                 <div class="flex justify-between text-xs font-bold uppercase tracking-wider">
                                     <span class="transition-colors duration-300 {i === result.prediction_code ? 'text-white' : 'text-gray-500'}">{label}</span>
@@ -414,7 +413,7 @@
                     <!-- Rule-Based Text Explanation -->
                     {#if result.text_explanation}
                          <div class="mt-5 bg-[#131720]/80 p-5 rounded-xl border border-gray-700/50 shadow-inner flex gap-4 items-start group hover:border-gray-600 transition-colors">
-                              <div class="text-2xl mt-1 opacity-80 group-hover:scale-110 transition-transform duration-300">🤖</div>
+                              <div class="text-2xl mt-1 opacity-80 group-hover:scale-110 transition-transform duration-300"> :) </div>
                               <div class="text-gray-300 text-sm leading-relaxed">
                                    <span class="font-bold text-white mb-1.5 block tracking-wide text-xs uppercase opacity-80">AI Clinical Reasoning Summary</span>
                                    <p>{@html result.text_explanation.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')}</p>
